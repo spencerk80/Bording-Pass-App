@@ -1,14 +1,10 @@
 package genspark.group.boardingpass;
 
-import genspark.group.boardingpass.data.BoardingPass;
-import genspark.group.boardingpass.data.FlightDetails;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
+
 import java.time.LocalTime;
 
 
@@ -21,8 +17,6 @@ public class HelloController {
     public Label outputAgeDiscountAmount;
     public Label outputTotalCost;
     public Button bookFlight_btn;
-    private BoardingPass boardingPassData;
-    private FlightDetails flightDetails;
 
     @FXML
     private TextField inputName;
@@ -47,8 +41,6 @@ public class HelloController {
 
 
     public void initialize() {
-        boardingPassData = new BoardingPass();
-        flightDetails = new FlightDetails();
         inputGenderSelection.getItems().addAll("Male", "Female");
         inputOriginSelection.getItems().addAll("ATL");
         inputDestinationSelection.getItems().addAll("LAX","ORD","DFW","DEN","JFK","SFO","LAS","SEA","CLT","MCO","MIA","PHX","EWR","IAH");

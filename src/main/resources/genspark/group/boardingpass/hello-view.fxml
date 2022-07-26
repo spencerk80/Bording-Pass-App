@@ -56,7 +56,7 @@
                         <ChoiceBox fx:id="inputDestinationSelection" prefHeight="26.0" prefWidth="195.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
 
                         <ChoiceBox fx:id="inputDepartTime" prefHeight="26.0" prefWidth="194.0" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                        <Button fx:id="estimate_btn" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#onEstimateButtonPress" prefHeight="24.0" prefWidth="200.0" text="Get Details" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
+                        <Button fx:id="estimate_btn" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="24.0" prefWidth="108.0" text="Get Details" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="11">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font></Button>
@@ -183,7 +183,7 @@
                                 <Font name="Verdana" size="14.0" />
                             </font>
                         </Label>
-                        <Button fx:id="bookFlight_btn" mnemonicParsing="false" onMouseClicked="#onBookFlightButtonPress" prefHeight="26.0" prefWidth="108.0" text="Book Flight" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
+                        <Button fx:id="bookFlight_btn" mnemonicParsing="false" prefHeight="26.0" prefWidth="108.0" text="Book Flight" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="9">
                      <font>
                         <Font name="Verdana" size="14.0" />
                      </font></Button>
