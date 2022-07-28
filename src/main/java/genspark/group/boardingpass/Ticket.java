@@ -1,10 +1,8 @@
 package genspark.group.boardingpass;
-
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Ticket {
     /*
@@ -47,7 +45,7 @@ public class Ticket {
     }
 
     private Date generateEta(Date departureTime) { // TODO - time math
-        return departureTime;
+        SimpleDateFormat dateForm= new SimpleDateFormat("MM/dd/y HH:mm");
     }
 
     /*
@@ -122,5 +120,40 @@ public class Ticket {
                 ", estimatedTimeOfArrival='" + eta + '\'' +
                 ", ticketPrice=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Ticket ticket;
+
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+
+        ticket = (Ticket) o;
+        if(boardingPassNumber == null) return false;
+        if(boardingPassNumber.equals(ticket.boardingPassNumber))return true;
+
+        //Numbers didn't match
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = boardingPassNumber != null ? boardingPassNumber.hashCode() : 0;
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        result = 31 * result + (getOrigin() != null ? getOrigin().hashCode() : 0);
+        result = 31 * result + (getDestination() != null ? getDestination().hashCode() : 0);
+        result = 31 * result + (eta != null ? eta.hashCode() : 0);
+        result = 31 * result + (getDepartureTime() != null ? getDepartureTime().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getPhoneNumber() != null ? getPhoneNumber().hashCode() : 0);
+        result = 31 * result + (getGender() != null ? getGender().hashCode() : 0);
+        result = 31 * result + getAge();
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
