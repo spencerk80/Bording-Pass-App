@@ -2,6 +2,7 @@ package genspark.group.boardingpass.dao;
 
 import genspark.group.boardingpass.Ticket;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -22,13 +23,13 @@ public class InMemTicketDao implements TicketDao {
     }
 
     @Override
-    public void writeTicket(Ticket ticket) {
+    public void writeTicket(Ticket ticket) throws IOException {
         if(tickets.contains(ticket)) return;
         tickets.add(ticket);
     }
 
     @Override
-    public Ticket readTicket(UUID ticketID) {
+    public Ticket readTicket(UUID ticketID) throws IOException {
         AtomicReference<Ticket> ticket = new AtomicReference<>();
 
         tickets.forEach(t -> {
@@ -39,7 +40,7 @@ public class InMemTicketDao implements TicketDao {
     }
 
     @Override
-    public void updateTicket(Ticket ticket) {
+    public void updateTicket(Ticket ticket) throws IOException {
         //If t (of for each ticket) == passed in ticket (the ids match) save the new ticket (fields may be diff)
         tickets = tickets.stream().map(t -> t.equals(ticket) ? ticket : t).collect(Collectors.toList());
     }
