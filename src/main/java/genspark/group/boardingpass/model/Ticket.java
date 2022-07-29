@@ -1,8 +1,6 @@
-package genspark.group.boardingpass;
-import java.text.SimpleDateFormat;
+package genspark.group.boardingpass.model;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
