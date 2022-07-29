@@ -39,7 +39,7 @@ public class Ticket {
 
         this.boardingPassNumber= (generateBoardingPassNumber());
         this.eta= generateEta(this.departureTime);
-        this.price= generatePrice(this.age, this.gender);
+        this.price= generatePrice(this.age, this.gender, this.eta, this.departureTime);
     }
 
     private UUID generateBoardingPassNumber() { // attempting to use UUId and inserted MAX_VALUE to force positive
@@ -58,9 +58,14 @@ public class Ticket {
     Females, 25% discount on the ticket price
     */
 
-    private double generatePrice(int age, String gender){ // 31mi(shortest) & 502mi (avg)
-        double randomMileage= 31 + new Random().nextDouble() * (502 - 31);
-        double price= randomMileage* (1.30); // avg cost/mi
+    private double generatePrice(int age, String gender, Date eta, Date departureTime){
+        Calendar c= Calendar.getInstance();
+        c.setTime(eta);
+        int etaHour= c.get(Calendar.HOUR_OF_DAY); // get hour of eta
+        c.setTime(departureTime);
+        int departureHour= c.get(Calendar.HOUR_OF_DAY); // get hour of departure
+        int flightHours= etaHour-  departureHour;
+        double price= (flightHours* 515)* (1.30); // avg cost/mi, 460 – 575 mph per hour
 
         if(age<= 12) {
             price*= 0.5;
