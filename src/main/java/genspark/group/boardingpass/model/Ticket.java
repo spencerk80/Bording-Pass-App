@@ -1,9 +1,7 @@
-package genspark.group.boardingpass;
-
+package genspark.group.boardingpass.model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -40,15 +38,17 @@ public class Ticket implements Serializable {
 
         this.boardingPassNumber= (generateBoardingPassNumber());
         this.eta= generateEta(this.departureTime);
-        this.price= generatePrice(this.age, this.gender);
+        this.price= generatePrice(this.age, this.gender, this.eta, this.departureTime);
     }
 
     private UUID generateBoardingPassNumber() { // attempting to use UUId and inserted MAX_VALUE to force positive
         return UUID.randomUUID();
     }
 
-    private Date generateEta(Date departureTime) { // TODO - time math
-        return departureTime;
+    private Date generateEta(Date departureTime) { // randomizes flight duration based on avg
+        int rand= ThreadLocalRandom.current().nextInt(3, 12+ 1);
+        long HOUR= 3_600* 1_000;
+        return new Date(departureTime.getTime()* rand* HOUR);
     }
 
     /*
@@ -57,9 +57,14 @@ public class Ticket implements Serializable {
     Females, 25% discount on the ticket price
     */
 
-    private double generatePrice(int age, String gender){ // 31mi(shortest) & 502mi (avg)
-        double randomMileage= 31 + new Random().nextDouble() * (502 - 31);
-        double price= randomMileage* (1.30); // avg cost/mi
+    private double generatePrice(int age, String gender, Date eta, Date departureTime){
+        Calendar c= Calendar.getInstance();
+        c.setTime(eta);
+        int etaHour= c.get(Calendar.HOUR_OF_DAY); // get hour of eta
+        c.setTime(departureTime);
+        int departureHour= c.get(Calendar.HOUR_OF_DAY); // get hour of departure
+        int flightHours= etaHour-  departureHour;
+        double price= (flightHours* 515)* (1.30); // avg cost/mi, 460 – 575 mph per hour
 
         if(age<= 12) {
             price*= 0.5;
@@ -127,5 +132,40 @@ public class Ticket implements Serializable {
                 ", estimatedTimeOfArrival='" + eta + '\'' +
                 ", ticketPrice=" + price +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Ticket ticket;
+
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+
+        ticket = (Ticket) o;
+        if(boardingPassNumber == null) return false;
+        if(boardingPassNumber.equals(ticket.boardingPassNumber))return true;
+
+        //Numbers didn't match
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = boardingPassNumber != null ? boardingPassNumber.hashCode() : 0;
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        result = 31 * result + (getOrigin() != null ? getOrigin().hashCode() : 0);
+        result = 31 * result + (getDestination() != null ? getDestination().hashCode() : 0);
+        result = 31 * result + (eta != null ? eta.hashCode() : 0);
+        result = 31 * result + (getDepartureTime() != null ? getDepartureTime().hashCode() : 0);
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getPhoneNumber() != null ? getPhoneNumber().hashCode() : 0);
+        result = 31 * result + (getGender() != null ? getGender().hashCode() : 0);
+        result = 31 * result + getAge();
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
     }
 }
