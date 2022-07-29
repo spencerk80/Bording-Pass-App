@@ -1,8 +1,10 @@
 package genspark.group.boardingpass;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Ticket {
     /*
@@ -44,8 +46,10 @@ public class Ticket {
         return UUID.randomUUID();
     }
 
-    private Date generateEta(Date departureTime) { // TODO - time math
-        SimpleDateFormat dateForm= new SimpleDateFormat("MM/dd/y HH:mm");
+    private Date generateEta(Date departureTime) { // randomizes flight duration based on avg
+        int rand= ThreadLocalRandom.current().nextInt(3, 12+ 1);
+        long HOUR= 3_600* 1_000;
+        return new Date(departureTime.getTime()* rand* HOUR);
     }
 
     /*
