@@ -28,6 +28,7 @@ public class TicketIndexer {
     //This info has to be saved to file, so this allows restoration
     public void setIndexMap(Map<UUID, Integer> indexMap) {
         this.indexMap = indexMap;
+        this.index = indexMap.size();
     }
 
     public void insertUUID(UUID id) {
@@ -36,6 +37,6 @@ public class TicketIndexer {
     }
 
     public int getIndex(UUID id) {
-        return indexMap.containsKey(id) ? indexMap.get(id) : -1;
+        return indexMap.getOrDefault(id, -1);
     }
 }
