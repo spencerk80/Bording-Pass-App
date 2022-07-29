@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public interface TicketDao {
-    TicketDao dao = InMemTicketDao.getInstance();
+    TicketDao dao = FileTicketDao.getInstance();
 
     void writeTicket(Ticket ticket) throws IOException;
     Ticket readTicket(UUID ticketID) throws IOException;
