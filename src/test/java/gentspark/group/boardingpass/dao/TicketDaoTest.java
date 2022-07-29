@@ -1,7 +1,7 @@
 package gentspark.group.boardingpass.dao;
 
-import genspark.group.boardingpass.Ticket;
 import genspark.group.boardingpass.dao.TicketDao;
+import genspark.group.boardingpass.model.Ticket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class TicketDaoTest {
 
     //Shortcut. Object is already static singleton. No chance of mem-leak by this
-    private TicketDao dao = TicketDao.dao;
+    private final TicketDao dao = TicketDao.dao;
 
     private Ticket makeTicket() {
         return new Ticket(new Date(),"Origin", "destination", new Date(), "Bob Smith",
@@ -34,8 +34,27 @@ public class TicketDaoTest {
             //Writing and reading the ticket back out should result in the same ticket
             dao.writeTicket(ticket);
             foundTicket = dao.readTicket(ticket.getBoardingPassNumber());
-            assertSame(foundTicket, ticket);
+            assertEquals(foundTicket, ticket);
         } catch(IOException e) {
+            System.err.println(e.getMessage());
+            fail();
+        }
+    }
+
+    @Test
+    public void writeManyReadOne() {
+        Ticket[]    tickets = new Ticket[5];
+        Ticket      foundTicket;
+
+        for(byte i = 0; i < 5; i++) tickets[i] = makeTicket();
+
+        try {
+            for(byte i = 0; i < 5; i++) dao.writeTicket(tickets[i]);
+
+            foundTicket = dao.readTicket(tickets[3].getBoardingPassNumber());
+            assertEquals(foundTicket, tickets[3]);
+        } catch(IOException e) {
+            System.err.println(e.getMessage());
             fail();
         }
     }
@@ -59,6 +78,7 @@ public class TicketDaoTest {
             assertEquals(ticket.getAge(), returnedTicket.getAge());
             assertEquals(42, returnedTicket.getAge());
         } catch(IOException e) {
+            System.err.println(e.getMessage());
             fail();
         }
     }

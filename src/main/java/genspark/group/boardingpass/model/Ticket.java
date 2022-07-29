@@ -1,10 +1,11 @@
 package genspark.group.boardingpass.model;
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Ticket {
+public class Ticket implements Serializable {
     /*
    Boarding Pass Number, Date, Origin, Destination, Estimated time of arrival (ETA), Departure Time
    Name, Email, Phone Number, Gender, Age

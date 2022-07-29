@@ -1,6 +1,6 @@
 package genspark.group.boardingpass.dao;
 
-import genspark.group.boardingpass.Ticket;
+import genspark.group.boardingpass.model.Ticket;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class InMemTicketDao implements TicketDao {
     private static InMemTicketDao  instance;
-    private List<Ticket>    tickets;
+    private List<Ticket> tickets;
 
     private InMemTicketDao() {
         tickets = new ArrayList<>();
