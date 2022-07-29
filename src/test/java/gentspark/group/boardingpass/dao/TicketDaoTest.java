@@ -1,7 +1,7 @@
 package gentspark.group.boardingpass.dao;
 
-import genspark.group.boardingpass.Ticket;
 import genspark.group.boardingpass.dao.TicketDao;
+import genspark.group.boardingpass.model.Ticket;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 

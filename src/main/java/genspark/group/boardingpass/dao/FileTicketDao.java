@@ -1,6 +1,6 @@
 package genspark.group.boardingpass.dao;
 
-import genspark.group.boardingpass.Ticket;
+import genspark.group.boardingpass.model.Ticket;
 
 import java.io.*;
 import java.nio.file.Files;
