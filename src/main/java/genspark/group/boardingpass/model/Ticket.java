@@ -75,6 +75,10 @@ public class Ticket {
         return price;
     }
 
+    public UUID getBoardingPassNumber() {
+        return boardingPassNumber;
+    }
+
     public Date getDate() {return date;}
 
     public void setDate(Date date) {this.date = date;}
