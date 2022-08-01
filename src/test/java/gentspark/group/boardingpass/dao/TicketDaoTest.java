@@ -10,17 +10,23 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/* Author: Kristoffer Spencer
+ *
+ * This is a test set to test the dao for read/write accuracy
+ */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class TicketDaoTest {
 
     //Shortcut. Object is already static singleton. No chance of mem-leak by this
     private final TicketDao dao = TicketDao.dao;
 
+    //Helper method to make a ticket more easily when needed
     private Ticket makeTicket() {
         return new Ticket(new Date(),"Origin", "destination", new Date(), "Bob Smith",
                 "b.smith@email.com", "5555555555", "male", 32);
     }
 
+    //This tests writes a ticket and reads it back to compare the state of the ticket before and after
     @Test
     public void writeAndReadTicket() {
         Ticket  ticket          = makeTicket(),
@@ -41,6 +47,8 @@ public class TicketDaoTest {
         }
     }
 
+    //This test writes multiple tickets and then tries to read one from the middle of tha group and compares. This is
+    //to make sure it can read a specific ticket and doesn't get the wrong one
     @Test
     public void writeManyReadOne() {
         Ticket[]    tickets = new Ticket[5];
@@ -48,6 +56,7 @@ public class TicketDaoTest {
 
         for(byte i = 0; i < 5; i++) tickets[i] = makeTicket();
 
+        //Write 5 tickets and read the 4th (index 3) ticket
         try {
             for(byte i = 0; i < 5; i++) dao.writeTicket(tickets[i]);
 
@@ -59,6 +68,7 @@ public class TicketDaoTest {
         }
     }
 
+    //This test makes sure a ticket's information can be updated and the changes are saved and read back
     @Test
     public void updateTicket() {
         Ticket  ticket              = makeTicket(),
