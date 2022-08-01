@@ -85,7 +85,7 @@ public class Ticket implements Serializable {
         return departureTime;
     }
 
-    public int getFlightTime() { // flight time :
+    public int getFlightTime() { // flight time : (8 hr)
         return flightTime(eta, departureTime);
     }
 
@@ -101,7 +101,7 @@ public class Ticket implements Serializable {
         return ageDiscount(age, eta, departureTime);
     }
 
-    public double getPrice() { // total cost :
+    public double getTotalPrice() { // total cost :
         return price;
     }
 
@@ -121,15 +121,9 @@ public class Ticket implements Serializable {
     */
     private double generatePrice(int age, String gender, Date eta, Date departureTime){
         double price= ticketPrice(eta, departureTime);
-
-        if(age<= 12) {
-            price*= 0.5;
-        } else if(age>= 60) {
-            price*= 0.4;
-        } else if(gender.toLowerCase().startsWith("f")) {
-            price*= 0.75;
-        }
-        return price;
+        double genderDiscount= genderDiscount(gender, eta, departureTime);
+        double ageDiscount= ageDiscount(age, eta, departureTime);
+        return price- genderDiscount- ageDiscount;
     }
 
     // flight details
@@ -160,7 +154,7 @@ public class Ticket implements Serializable {
         double price= ticketPrice(eta, departureTime);
         if(gender.toLowerCase().startsWith("f")) {
             price*= .25;
-        }
+        } else return 0;
         return price;
     }
 

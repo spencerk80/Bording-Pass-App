@@ -20,8 +20,8 @@ public class TicketTest {
     @Test
     void generatePrice() {
         var ticket= makeTicket();
-        assertNotEquals(0, ticket.getPrice());
-        System.out.println("Price : "+ ticket.getPrice());
+        assertNotEquals(0, ticket.getTotalPrice());
+        System.out.println("Price : "+ ticket.getTotalPrice());
     }
 
     @Test
