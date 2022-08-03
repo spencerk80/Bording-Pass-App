@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="91e31e83-4526-4c3c-bd91-bbbeaca079ed" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="91e31e83-4526-4c3c-bd91-bbbeaca079ed" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,7 +51,7 @@
       <recent name="genspark.group.boardingpass.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="JUnit.TicketControllerTest">
     <configuration name="TicketControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Bording-Pass-App" />
       <extension name="coverage">
@@ -69,9 +67,26 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TicketControllerTest.onEstimateBtnClick" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Bording-Pass-App" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="genspark.group.boardingpass.controller.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="genspark.group.boardingpass.controller" />
+      <option name="MAIN_CLASS_NAME" value="genspark.group.boardingpass.controller.TicketControllerTest" />
+      <option name="METHOD_NAME" value="onEstimateBtnClick" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.TicketControllerTest" />
+        <item itemvalue="JUnit.TicketControllerTest.onEstimateBtnClick" />
       </list>
     </recent_temporary>
   </component>

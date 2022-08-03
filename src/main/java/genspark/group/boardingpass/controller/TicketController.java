@@ -1,6 +1,6 @@
 package genspark.group.boardingpass.controller;
-import genspark.group.boardingpass.Ticket;
 import genspark.group.boardingpass.dao.TicketDao;
+import genspark.group.boardingpass.model.Ticket;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -8,8 +8,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.UUID;
 
 public class TicketController {
 
@@ -31,39 +31,26 @@ public class TicketController {
     ChoiceBox inputDestinationSelection;
     @FXML
     ChoiceBox inputDepartTime;
-
     @FXML
     Label outputFlightTime;
-
     @FXML
     Label outputArrivalTime;
-
     @FXML
     Label outputFlightDuration;
-
     @FXML
     Label outputTicketPrice;
-
     @FXML
     Label outputLadiesDiscountAmount;
-
     @FXML
     Label outputAgeDiscountAmount;
-
     @FXML
     Label outputTotalCost;
-
     @FXML
     Button bookFlight_btn;
 
     Ticket ticket;
 
-    TicketController(){
-
-        bookFlight_btn.setEnabled(false);
-
-    }
-
+    TicketController(){}
 
     public void onEstimateBtnClick() throws ParseException {
 
@@ -100,22 +87,37 @@ public class TicketController {
             //create a new instance of Ticket
             Ticket ticket = new Ticket(flightDate, origin, destination, departTime, name, email, phone, gender, age);
 
-
             //print Flight Details Panel
-            outputFlightTime.setText(ticket.getDepartureTime().toString());
+            //Departure
+            Calendar cal= Calendar.getInstance();
+            cal.setTime(ticket.getDepartureTime());
+            int hours = cal.get(Calendar.HOUR_OF_DAY);
+            int minutes = cal.get(Calendar.MINUTE);
+            String hourDeparture = hours+":"+minutes;
+            outputFlightTime.setText(hourDeparture);
 
-            //check where values are coming
-            outputArrivalTime.setText("eta"); //eta exists in Ticket, but I am not able to get its value"
-            outputFlightDuration.setText("5:45"); //"should be the difference between before times"
+            //Arrival
+            cal.setTime(ticket.getEta());
+            hours = cal.get(Calendar.HOUR_OF_DAY);
+            minutes = cal.get(Calendar.MINUTE);
+            String hourEta = hours+":"+minutes;
+            outputArrivalTime.setText(hourEta);
+
+            //Flight Time
+            outputFlightDuration.setText(String.valueOf(ticket.getFlightTime()));
 
             //Ticket price
-            outputTicketPrice.setText("$ " + "00.00"); //"Total Price"
-            outputLadiesDiscountAmount.setText("$ " + "00.00" ); //"Gender discount"
-            outputAgeDiscountAmount.setText("$ " + "00.00"); //"Age discount"
-            outputTotalCost.setText("$ " + "00.00"); //"Price - discounts"
+            outputTicketPrice.setText("$ "+ ticket.getTicketPrice());
 
+            //Gender Discount
+            outputLadiesDiscountAmount.setText("$ "+ ticket.getGenderDiscount());
+
+            //Age discount
+            outputAgeDiscountAmount.setText("$ "+ ticket.getAgeDiscount());
+
+            //Total Cost
+            outputTotalCost.setText("$ "+ ticket.getTicketPrice());
         }
-
     }
 
     public void onBookBtnClick(){
@@ -131,13 +133,4 @@ public class TicketController {
     public void writeTicket(Ticket ticket) throws IOException {
         TicketDao.dao.writeTicket(ticket);
     }
-
-    public Ticket readTicket (UUID ticketID) throws IOException {
-        return TicketDao.dao.readTicket(ticketID);
-    }
-
-    public void updateTicket(Ticket ticket) throws IOException {
-        TicketDao.dao.updateTicket(ticket);
-    }
-
 }
