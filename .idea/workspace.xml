@@ -17,6 +17,8 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="AnnotationType" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -75,32 +77,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketDaoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Boarding-Pass-App" />
+    <configuration name="TicketControllerTest.onEstimateBtnClick" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Bording-Pass-App" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gentspark.group.boardingpass.dao.*" />
+          <option name="PATTERN" value="genspark.group.boardingpass.controller.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="gentspark.group.boardingpass.dao" />
-      <option name="MAIN_CLASS_NAME" value="gentspark.group.boardingpass.dao.TicketDaoTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TicketDaoTest.writeAndReadTicket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Boarding-Pass-App" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="gentspark.group.boardingpass.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="gentspark.group.boardingpass.dao" />
-      <option name="MAIN_CLASS_NAME" value="gentspark.group.boardingpass.dao.TicketDaoTest" />
-      <option name="METHOD_NAME" value="writeAndReadTicket" />
+      <option name="PACKAGE_NAME" value="genspark.group.boardingpass.controller" />
+      <option name="MAIN_CLASS_NAME" value="genspark.group.boardingpass.controller.TicketControllerTest" />
+      <option name="METHOD_NAME" value="onEstimateBtnClick" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
