@@ -141,7 +141,10 @@ public class Ticket implements Serializable {
         int etaHour= c.get(Calendar.HOUR_OF_DAY); // get hour of eta
         c.setTime(departureTime);
         int departureHour= c.get(Calendar.HOUR_OF_DAY); // get hour of departure
-        return etaHour-  departureHour;
+        int num= etaHour- departureHour;
+        if(num< 0) {
+            return Math.abs(departureHour- 24- etaHour);
+        } else return num;
     }
 
     // pricing details :
