@@ -1,10 +1,9 @@
 package genspark.group.boardingpass.controller;
+
 import genspark.group.boardingpass.dao.TicketDao;
 import genspark.group.boardingpass.model.Ticket;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.DatePicker;
-import java.awt.*;
+import javafx.scene.control.*;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,45 +11,37 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TicketController {
-
     @FXML
-    TextField inputName;
+    private TextField inputName;
     @FXML
-    TextField inputAge;
+    private TextField inputAge;
     @FXML
-    ChoiceBox inputGenderSelection;
+    private ChoiceBox inputGenderSelection;
     @FXML
-    TextField inputPhoneNumber;
+    private TextField inputPhoneNumber;
     @FXML
-    TextField inputEmail;
+    private TextField inputEmail;
     @FXML
-    DatePicker inputDate;
+    private DatePicker inputDate;
     @FXML
-    ChoiceBox inputOriginSelection;
+    private ChoiceBox inputOriginSelection;
     @FXML
-    ChoiceBox inputDestinationSelection;
+    private ChoiceBox inputDestinationSelection;
     @FXML
-    ChoiceBox inputDepartTime;
-    @FXML
-    Label outputFlightTime;
-    @FXML
-    Label outputArrivalTime;
-    @FXML
-    Label outputFlightDuration;
-    @FXML
-    Label outputTicketPrice;
-    @FXML
-    Label outputLadiesDiscountAmount;
-    @FXML
-    Label outputAgeDiscountAmount;
-    @FXML
-    Label outputTotalCost;
-    @FXML
-    Button bookFlight_btn;
+    private ChoiceBox inputDepartTime;
+    public Label outputFlightTime;
+    public Label outputArrivalTime;
+    public Label outputFlightDuration;
+    public Label outputTicketPrice;
+    public Label outputLadiesDiscountAmount;
+    public Label outputAgeDiscountAmount;
+    public Label outputTotalCost;
+    public Button bookFlight_btn;
+    public Button estimate_btn;
 
     Ticket ticket;
 
-    TicketController(){}
+    public TicketController(){}
 
     public void onEstimateBtnClick() throws ParseException {
 
@@ -60,7 +51,7 @@ public class TicketController {
                 inputPhoneNumber.getText() != null && inputGenderSelection.getValue() != null){
 
             //Enable bookFlight_btn
-            bookFlight_btn.setEnabled(true);
+            bookFlight_btn.setDisable(false);
 
             Date flightDate = new SimpleDateFormat("MM/dd/yyyy").parse(inputDate.getValue().toString());
 
